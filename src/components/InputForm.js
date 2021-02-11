@@ -1,34 +1,18 @@
-import { Form, Input, Button } from 'antd';
-import {AppstoreAddOutlined,UserOutlined,PictureOutlined,HighlightOutlined} from '@ant-design/icons';
+import { Form, Input } from 'antd';
+import {UserOutlined,PictureOutlined,HighlightOutlined} from '@ant-design/icons';
 
 
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
-
-const InputForm = () => {
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
+const InputForm = ({form}) => {
   return (
     <Form
       layout="vertical"
       name="inputForm"
+      form={form}
       initialValues={{
         name:'',
         caption:'',
         url:''
       }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
     >
       <Form.Item
         label="Meme Owner"
@@ -36,7 +20,7 @@ const InputForm = () => {
         rules={[
           {
             required: true,
-            message: "Feeling shy 😊 to share your name? No worries I will keep it safe",
+            message: "Insecure 😊 too share your name? No worries I will keep it safe",
           },
         ]}
       >
@@ -49,7 +33,7 @@ const InputForm = () => {
         rules={[
           {
             required: true,
-            message: 'AHH!!! Cannot think of any creative caption?',
+            message: 'Trying to be too creative, KISS 😎',
           },
         ]}
       >
@@ -62,17 +46,11 @@ const InputForm = () => {
         rules={[
           {
             required: true,
-            message: "Genius! A meme without an image 🧐",
+            message: "A meme without an image or an invisible meme 🧐",
           },
         ]}
       >
         <Input prefix={<PictureOutlined className="site-form-item-icon" />} placeholder="Enter the cloud url of the image, and make sure there's no rain 🌧 "/>
-      </Form.Item>
-
-      <Form.Item {...tailLayout}>
-        <Button type="primary" htmlType="submit" icon={<AppstoreAddOutlined />}>
-          Add to Meme Box
-        </Button>
       </Form.Item>
     </Form>
   );
