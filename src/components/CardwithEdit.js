@@ -6,6 +6,7 @@ const { Meta } = Card;
 const CardwithEdit = ({imgSrc,title,description, showFormDialog }) => {
   return (
     <Card
+      className="shadow-sm"
       hoverable // Hover effect on card
       loading={false} // Shows the loading skeleton when true
       cover={ // Card cover image
