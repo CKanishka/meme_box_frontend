@@ -3,7 +3,13 @@ import { EditOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-const CardwithEdit = ({imgSrc,title,description, showFormDialog }) => {
+const CardwithEdit = ({item, form, setIsEdit, showFormDialog }) => {
+  const editForm = () => {
+    setIsEdit(true);
+    form.setFieldsValue(item);
+    showFormDialog()
+  }
+  const {url,caption,user} = item;
   return (
     <Card
       className="shadow-sm"
@@ -12,11 +18,11 @@ const CardwithEdit = ({imgSrc,title,description, showFormDialog }) => {
       cover={ // Card cover image
         <Image
           height={250}
-          src={`https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png`}
+          src={url}
           placeholder={
             <Image
               preview={false}
-              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
+              src={url}
               width={200}
             />
           }
@@ -28,12 +34,12 @@ const CardwithEdit = ({imgSrc,title,description, showFormDialog }) => {
           <Button
             type="text"
             icon={<EditOutlined />}
-            onClick={showFormDialog}
+            onClick={editForm}
           ></Button>
         </Tooltip>,
       ]}
     >
-      <Meta title={title} description={description} /> 
+      <Meta title={caption} description={`By ${user}`} /> 
     </Card>
   );
 };

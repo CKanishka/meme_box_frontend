@@ -16,7 +16,7 @@ const InputForm = ({form}) => {
     >
       <Form.Item
         label="Meme Owner"
-        name="name"
+        name="user"
         rules={[
           {
             required: true,

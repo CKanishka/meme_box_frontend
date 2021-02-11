@@ -7,6 +7,7 @@ const AddButton = ({ text,onClick }) => (
     shape="round"
     icon={<PlusCircleOutlined />}
     onClick={onClick}
+    style={{color:"yellow"}}
     
   >
     {text && text.trim() ? text : "Add New Meme"}

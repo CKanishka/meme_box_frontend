@@ -6,44 +6,47 @@ import EmptyListCard from "./components/EmptyListCard";
 import logo from "./static/images/logo.png";
 import FormDialog from "./components/FormDialog";
 import AddButton from "./components/AddButton";
+import { Form } from "antd";
+
 const data = [
-  {
-    title: "Title 1",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi est molestias, distinctio delectus quia similique qui corporis",
+  { 
+    id:1,
+    url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
+    caption: "Title 1",
+    user:'User 1'
   },
-  {
-    title: "Title 2",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi est molestias, distinctio delectus quia similique qui corporis",
+  { 
+    id:1,
+    url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
+    caption: "Title 2",
+    user:'User 1'
   },
-  {
-    img: "https:google.com",
-    title: "Title 3",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi est molestias, distinctio delectus quia similique qui corporis",
+  { id:1,
+    url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
+    caption: "Title 3",
+    user:'User 1'
   },
-  {
-    img: "https:google.com",
-    title: "Title 4",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi est molestias, distinctio delectus quia similique qui corporis",
+  { id:1,
+    url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
+    caption: "Title 4",
+    user:'User 1'
   },
-  {
-    img: "https:google.com",
-    title: "Title 5",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi est molestias, distinctio delectus quia similique qui corporis",
+  { id:1,
+    url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
+    caption: "Title 5",
+    user:'User 1'
   },
-  {
-    img: "https:google.com",
-    title: "Title 6",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi est molestias, distinctio delectus quia similique qui corporis",
+  { id:1, 
+    url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
+    caption: "Title 6",
+    user:'User 1'
   },
 ];
+
 function App() {
   const [visible, setVisible] = React.useState(false);
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [form] = Form.useForm();
   const showFormDialog = () => {
     setVisible(true);
   };
@@ -59,8 +62,8 @@ function App() {
             {data.length && <AddButton onClick={showFormDialog} />}
           </div>
           {!data.length && <EmptyListCard showFormDialog={showFormDialog} />}
-          <CardsList data={data} showFormDialog={showFormDialog} />
-          <FormDialog visible={visible} hideModal={hideFormDialog} />
+          <CardsList data={data} form={form} showFormDialog={showFormDialog} setIsEdit={setIsEdit}/>
+          <FormDialog visible={visible} form={form} isEdit={isEdit} setIsEdit={setIsEdit} hideModal={hideFormDialog} />
         </div>
       </Content>
     </Layout>
