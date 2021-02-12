@@ -9,7 +9,7 @@ const CardwithEdit = ({item, form, setIsEdit, showFormDialog }) => {
     form.setFieldsValue(item);
     showFormDialog()
   }
-  const {url,caption,user} = item;
+  const {url,caption,name} = item;
   return (
     <Card
       className="shadow-sm"
@@ -39,7 +39,7 @@ const CardwithEdit = ({item, form, setIsEdit, showFormDialog }) => {
         </Tooltip>,
       ]}
     >
-      <Meta title={caption} description={`By ${user}`} /> 
+      <Meta title={caption} description={`By ${name}`} /> 
     </Card>
   );
 };

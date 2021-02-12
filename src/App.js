@@ -13,33 +13,33 @@ const data = [
     id:1,
     url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
     caption: "Title 1",
-    user:'User 1'
+    name:'User 1'
   },
   { 
     id:1,
     url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
     caption: "Title 2",
-    user:'User 1'
+    name:'User 1'
   },
   { id:1,
     url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
     caption: "Title 3",
-    user:'User 1'
+    name:'User 1'
   },
   { id:1,
     url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
     caption: "Title 4",
-    user:'User 1'
+    name:'User 1'
   },
   { id:1,
     url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
     caption: "Title 5",
-    user:'User 1'
+    name:'User 1'
   },
   { id:1, 
     url: "https://cdn.memes.com/up/60455891599502993/i/1612992766278.jpg",
     caption: "Title 6",
-    user:'User 1'
+    name:'User 1'
   },
 ];
 
