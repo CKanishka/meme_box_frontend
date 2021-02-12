@@ -1,7 +1,7 @@
 import { List } from "antd";
 import CardwithEdit from "./CardwithEdit";
 
-const CardsList = ({ data, form, setIsEdit, showFormDialog }) => {
+const CardsList = ({ data, form, setIsEdit, setActiveItemId,deleteMeme, showFormDialog }) => {
   return (
     <div style={{ marginTop: "3rem" }}>
       <List
@@ -23,6 +23,8 @@ const CardsList = ({ data, form, setIsEdit, showFormDialog }) => {
               item={item}
               form={form}
               setIsEdit={setIsEdit}
+              setActiveItemId={setActiveItemId}
+              deleteMeme={deleteMeme}
               showFormDialog={showFormDialog}
             />
           </List.Item>

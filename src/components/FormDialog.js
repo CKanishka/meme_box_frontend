@@ -1,32 +1,31 @@
-import React, { useEffect } from "react";
-import { Modal, Button } from "antd";
-import { AppstoreAddOutlined,EditOutlined } from "@ant-design/icons";
+import React from "react";
+import { Modal, Button} from "antd";
+import { AppstoreAddOutlined, EditOutlined } from "@ant-design/icons";
 import InputForm from "./InputForm";
 
-const FormDialog = ({ visible, form, setIsEdit, isEdit, hideModal }) => {
+const FormDialog = ({
+  visible,
+  form,
+  setIsEdit,
+  isEdit,
+  hideModal,
+  addMeme,
+  updateMeme
+}) => {
   const [confirmLoading, setConfirmLoading] = React.useState(false);
-  const [modalText, setModalText] = React.useState("Content of the modal");
 
-  const handleOk = () => {
-    setModalText("The modal will be closed after two seconds");
-
-    form
-      .validateFields() // If all fields validated then try submitting the form
-      .then((res) => {
-        console.log(res);
-        setConfirmLoading(true);
-        setTimeout(() => {
-          setIsEdit(false);   // Reset edit mode
-          form.resetFields(); // If form submit was successful, then reset the fields and close the dialog
-          setConfirmLoading(false);
-          hideModal();
-        }, 2000);
-      })
-      .catch((err) => console.log(err));
+  const handleOk = async () => {
+    await form.validateFields(); // If all fields validated then try submitting the form
+    setConfirmLoading(true);
+    isEdit?await updateMeme():await addMeme();
+    setConfirmLoading(false);
+    setIsEdit(false); // Reset edit mode
+    form.resetFields(); // If form submit was successful, then reset the fields and close the dialog
+    hideModal();
   };
 
   const handleCancel = () => {
-    setIsEdit(false);   // Reset edit mode 
+    setIsEdit(false); // Reset edit mode
     form.resetFields(); // clear the form on cancel
     hideModal();
   };
@@ -45,7 +44,8 @@ const FormDialog = ({ visible, form, setIsEdit, isEdit, hideModal }) => {
         <Button
           key="submit"
           type="primary"
-          icon={ isEdit? <EditOutlined />: <AppstoreAddOutlined />}
+          loading={confirmLoading}
+          icon={isEdit ? <EditOutlined /> : <AppstoreAddOutlined />}
           onClick={handleOk}
         >
           {isEdit ? "Update Meme" : "Add to Meme Box"}

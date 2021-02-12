@@ -1,11 +1,12 @@
-import { Card, Image, Button, Tooltip } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { Card, Image, Button, Tooltip ,Popconfirm} from "antd";
+import { EditOutlined,DeleteOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-const CardwithEdit = ({item, form, setIsEdit, showFormDialog }) => {
+const CardwithEdit = ({item, form, setIsEdit, setActiveItemId, deleteMeme, showFormDialog }) => {
   const editForm = () => {
     setIsEdit(true);
+    setActiveItemId(item.id);
     form.setFieldsValue(item);
     showFormDialog()
   }
@@ -37,6 +38,15 @@ const CardwithEdit = ({item, form, setIsEdit, showFormDialog }) => {
             onClick={editForm}
           ></Button>
         </Tooltip>,
+       
+          <Popconfirm placement="top" title="Are you sure you want to delete item" onConfirm={deleteMeme} okText="Yes" cancelText="No">
+          <Button
+            type="text"
+            danger
+            icon={<DeleteOutlined />}
+          ></Button>
+          </Popconfirm>
+       ,
       ]}
     >
       <Meta title={caption} description={`By ${name}`} /> 

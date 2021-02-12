@@ -20,7 +20,7 @@ const InputForm = ({form}) => {
         rules={[
           {
             required: true,
-            message: "Insecure 😊 too share your name? No worries I will keep it safe",
+            message: "Insecure 🤔 to share your name? No worries I will keep it safe",
           },
         ]}
       >
