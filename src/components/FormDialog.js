@@ -52,7 +52,7 @@ const FormDialog = ({
         </Button>,
       ]}
     >
-      <InputForm form={form} />
+      <InputForm form={form} isEdit={isEdit}/>
     </Modal>
   );
 };

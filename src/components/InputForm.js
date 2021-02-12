@@ -2,7 +2,7 @@ import { Form, Input } from 'antd';
 import {UserOutlined,PictureOutlined,HighlightOutlined} from '@ant-design/icons';
 
 
-const InputForm = ({form}) => {
+const InputForm = ({form,isEdit}) => {
   return (
     <Form
       layout="vertical"
@@ -24,7 +24,7 @@ const InputForm = ({form}) => {
           },
         ]}
       >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="What do friends call you?"/>
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="What do friends call you?" disabled={isEdit}/>
       </Form.Item>
 
       <Form.Item
