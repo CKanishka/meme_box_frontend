@@ -3,12 +3,16 @@ import { EditOutlined,DeleteOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
 
-const CardwithEdit = ({item, form, setIsEdit, setActiveItemId, deleteMeme, showFormDialog }) => {
+const CardwithEdit = ({item, form, setIsEdit, setUpdateItemId, setDeleteItemId, showFormDialog }) => {
   const editForm = () => {
     setIsEdit(true);
-    setActiveItemId(item.id);
+    setUpdateItemId(item.id);
     form.setFieldsValue(item);
     showFormDialog()
+  }
+
+  const deleteItem = () => {
+    setDeleteItemId(item.id)
   }
   const {url,caption,name} = item;
   return (
@@ -39,7 +43,7 @@ const CardwithEdit = ({item, form, setIsEdit, setActiveItemId, deleteMeme, showF
           ></Button>
         </Tooltip>,
        
-          <Popconfirm placement="top" title="Are you sure you want to delete item" onConfirm={deleteMeme} okText="Yes" cancelText="No">
+          <Popconfirm placement="top" title="Are you sure you want to delete item" onConfirm={deleteItem} okText="Yes" cancelText="No">
           <Button
             type="text"
             danger

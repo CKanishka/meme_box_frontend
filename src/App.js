@@ -14,13 +14,21 @@ function App() {
   const [data, setData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
-  const [activeItemId, setActiveItemId] = React.useState(null);
+  const [updateItemId, setUpdateItemId] = React.useState(null);
+  const [deleteItemId, setDeleteItemId] = React.useState(null);
   const [isEdit, setIsEdit] = React.useState(false);
   const [form] = Form.useForm();
 
   React.useEffect(() => {
     getMemes(); // Get latest memes when page is mounted
   }, []);
+  
+  React.useEffect(()=>{
+    if(deleteItemId){     // If delete item id is updated trigger deleteMeme function
+      deleteMeme()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[deleteItemId])
 
   /*************************CRUD Functions for Meme*************************************/
   const getMemes = async () => {
@@ -42,7 +50,7 @@ function App() {
     const newMeme = form.getFieldsValue();
     try {
       // POST API to submit a new meme
-      const id = await (
+      const res = await (
         await fetch(`${API_URL}/memes`, {
           method: "POST",
           headers: {
@@ -52,7 +60,7 @@ function App() {
         })
       ).json();
       // If meme added successfully, add it to the list of existing memes and show a notification
-      setData([{ ...newMeme, id }, ...data]);
+      setData([{ ...newMeme, id:res.id }, ...data]);
       notification.success({
         message: "Success",
         description: "Kudos! meme added to the meme box.",
@@ -69,7 +77,7 @@ function App() {
     const { caption, url } = form.getFieldsValue();
     try {
       // PATCH API to update an existing meme
-      await fetch(`${API_URL}/memes/${activeItemId}`, {
+      await fetch(`${API_URL}/memes/${updateItemId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +88,7 @@ function App() {
       // If meme updated successfully, update the item in the list of existing memes and show a notification
       setData(
         data.map((item) =>
-          item.id === activeItemId ? { ...item, caption, url } : item
+          item.id === updateItemId ? { ...item, caption, url } : item
         )
       );
       notification.success({
@@ -98,12 +106,12 @@ function App() {
   const deleteMeme = async () => {
     try {
       // DELETE API to delete an existing meme
-      await fetch(`${API_URL}/memes/${activeItemId}`, {
+      await fetch(`${API_URL}/memes/${deleteItemId}`, {
         method: "DELETE",
       });
 
       // If meme deleted successfully, delete the item from the list of existing memes and show a notification
-      setData(data.filter((item) => item.id !== activeItemId));
+      setData(data.filter((item) => item.id !== deleteItemId));
       notification.success({
         message: "Success",
         description: "Kudos! meme deleted successfully.",
@@ -147,8 +155,8 @@ function App() {
                 form={form}
                 showFormDialog={showFormDialog}
                 setIsEdit={setIsEdit}
-                setActiveItemId={setActiveItemId}
-                deleteMeme={deleteMeme}
+                setUpdateItemId={setUpdateItemId}
+                setDeleteItemId={setDeleteItemId}
               />
             </>
           )}
