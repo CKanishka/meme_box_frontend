@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, notification, Divider } from "antd";
+import { Form, notification, Divider,Alert } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import "./App.css";
 import AddButton from "./components/AddButton";
@@ -17,8 +17,8 @@ function App() {
   const [updateItemId, setUpdateItemId] = React.useState(null);
   const [deleteItemId, setDeleteItemId] = React.useState(null);
   const [isEdit, setIsEdit] = React.useState(false);
+  const [offline,setOffline] = React.useState(false);
   const [form] = Form.useForm();
-
   React.useEffect(() => {
     getMemes(); // Get latest memes when page is mounted
   }, []);
@@ -29,7 +29,16 @@ function App() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[deleteItemId])
-
+  
+  // check if offline
+  React.useEffect(() => {
+    window.addEventListener("offline", ()=>setOffline(true));
+    window.addEventListener("online", ()=>setOffline(false));
+    return () => {
+      window.removeEventListener("offline", setOffline);
+      window.removeEventListener("online", setOffline);
+    };
+  }, []);
   /*************************CRUD Functions for Meme*************************************/
   const getMemes = async () => {
     try {
@@ -131,9 +140,11 @@ function App() {
   const hideFormDialog = () => {
     setVisible(false);
   };
+  
   return (
     <Layout>
       <Content>
+        {offline&&<Alert message="You are offline. Cached data is shown." type="warning" className="text-center"/>}
         <div className="container">
           <div className="text-center">
             <img src={logo} width="300" height="200" alt="Meme Box Logo" />
