@@ -17,7 +17,7 @@ function App() {
   const [updateItemId, setUpdateItemId] = React.useState(null);
   const [deleteItemId, setDeleteItemId] = React.useState(null);
   const [isEdit, setIsEdit] = React.useState(false);
-  const [offline,setOffline] = React.useState(false);
+  const [offline,setOffline] = React.useState(!navigator.onLine);
   const [form] = Form.useForm();
   React.useEffect(() => {
     getMemes(); // Get latest memes when page is mounted
