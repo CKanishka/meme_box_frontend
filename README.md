@@ -1,5 +1,4 @@
-## UI for http://meme-box.herokuapp.com/ built using React + Ant Design
-Webapp to fill your meme appetite.
+## Webapp to fill your meme appetite.
 
 ### Demo
 
